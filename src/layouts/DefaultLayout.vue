@@ -1,13 +1,7 @@
 <script setup>
-
-import BooksRow from "@/components/BooksRow.vue";
-import HeaderRow from "@/components/HeaderRow.vue";
+import HeaderRow from "@/components/HeaderRow.vue"
 import CategoriesCol from "@/components/CategoriesCol.vue";
-import PaginationRow from "@/components/PaginationRow.vue";
 import FooterRow from "@/components/FooterRow.vue";
-import HomePage from "@/pages/HomePage.vue";
-import BookInfoPage from "@/pages/BookInfoPage.vue";
-
 </script>
 
 <template>
@@ -16,18 +10,11 @@ import BookInfoPage from "@/pages/BookInfoPage.vue";
         <div class="row mt-3">
             <CategoriesCol />
             <div class="col-12 col-md-8 col-xl-9">
-            <router-view />
-
+                <router-view />
             </div>
         </div>
         <FooterRow />
-
     </div>
-
-
-
-
-
 </template>
 
 <style scoped>
