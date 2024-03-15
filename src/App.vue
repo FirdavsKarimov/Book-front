@@ -1,29 +1,10 @@
 <script setup>
 
-import BooksRow from "@/components/BooksRow.vue";
-import HeaderRow from "@/components/HeaderRow.vue";
-import CategoriesCol from "@/components/CategoriesCol.vue";
-import PaginationRow from "@/components/PaginationRow.vue";
-import FooterRow from "@/components/FooterRow.vue";
-import HomePage from "@/pages/HomePage.vue";
-import BookInfoPage from "@/pages/BookInfoPage.vue";
 
 </script>
 
 <template>
-    <div class="container-fluid">
-        <HeaderRow />
-        <div class="row mt-3">
-            <CategoriesCol />
-            <div class="col-12 col-md-8 col-xl-9">
-            <router-view />
-
-            </div>
-        </div>
-        <FooterRow />
-
-    </div>
-
+    <component :is="$route.meta.layout" />
 
 
 
