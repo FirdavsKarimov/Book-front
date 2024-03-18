@@ -1,5 +1,32 @@
 <script setup>
 
+import FormInput from "@/components/tags/FormInput.vue";
+import FormButton from "@/components/tags/FormButton.vue";
+
+import {ref, reactive} from "vue";
+import axios from "axios";
+
+let isLoading = ref(false);
+let authorization = reactive({
+    email: "",
+    password: ""
+})
+
+function auth() {
+    isLoading.value = true
+    axios.post('http://localhost:8888/api/users/auth', authorization)
+        .then ((res) => {
+            console.log('Token olindi')
+            localStorage.setItem('token', res.data.token)
+            console.log(res)
+        })
+        .catch
+         ((error) => {
+             console.log(error)
+            })
+            }
+
+
 </script>
 
 <template>
@@ -9,19 +36,10 @@
                 Kirish
             </h1>
             <form>
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control">
-                </div>
+                <FormInput v-model="authorization.email" props-id="email" label-name="Email" input-type="email"/>
+                <FormInput v-model="authorization.password" label-name="Parol" props-id="password"/>
                 <div class="text-end">
-                    <button type="button" class="btn btn-primary" style="min-width: 25%">
-                        <span>Kirish</span>
-                        <span class="spinner-border spinner-border-sm text-light"></span>
-                    </button>
+                    <FormButton @click="auth()" :loading="isLoading" text="SignIn" class="btn-primary"/>
                 </div>
             </form>
         </div>
