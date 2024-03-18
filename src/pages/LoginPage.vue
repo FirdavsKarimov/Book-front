@@ -3,8 +3,12 @@
 import FormInput from "@/components/tags/FormInput.vue";
 import FormButton from "@/components/tags/FormButton.vue";
 
-import {ref, reactive} from "vue";
-import axios from "axios";
+import {reactive, ref} from "vue";
+import {useAuthorization} from "@/stores/user/authorization.js";
+
+import {useRouter} from "vue-router";
+const router = useRouter()
+console.log(router)
 
 let isLoading = ref(false);
 let authorization = reactive({
@@ -14,17 +18,11 @@ let authorization = reactive({
 
 function auth() {
     isLoading.value = true
-    axios.post('http://localhost:8888/api/users/auth', authorization)
-        .then ((res) => {
-            console.log('Token olindi')
-            localStorage.setItem('token', res.data.token)
-            console.log(res)
+    useAuthorization().userAuth(authorization)
+        .then(()=>{
+            router.push('/')
         })
-        .catch
-         ((error) => {
-             console.log(error)
-            })
-            }
+}
 
 
 </script>
